@@ -11,6 +11,6 @@ if __name__=='__main__':
     while True:
 
         print("enter value for servo 1")
-        S1.value = input()
+        S1.value = float(input())
         print("enter value for servo 2")
-        S2.value = input()
+        S2.value = float(input())
