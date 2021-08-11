@@ -10,7 +10,7 @@ def calculate_angles(distance_horizontal):
     """ Calculate angles for inverse kinematics"""
     dist_a = 8.5
     dist_b = 12
-    dist_c = np.sqrt(dist_a**2 + dist_b**2)
+    dist_c = np.sqrt(dist_a**2 + dist_b**2) + distance_horizontal
 
     angle_a = np.arccos((dist_b**2 + dist_c**2 - dist_a**2)/(2*dist_b*dist_c))
     angle_b = np.arccos((dist_a**2 + dist_c**2 - dist_b**2)/(2*dist_a*dist_c))
@@ -25,14 +25,14 @@ def calculate_angles(distance_horizontal):
     angle_b = (angle_b - 90) / 180
     angle_c = (angle_c - 90) / 180
     
-    return angle_b, angle_c
+    return angle_b, -angle_c
 
 
 if __name__=='__main__':
     S1.value = 0
     S2.value = 0
     # while True:
-    movment = [16.7, 14.7, 12.7, 11.7, 12.7, 14.7]
+    movment = [0.5,1,2,1,0.5,-0.5,-1,-0.5]
     
     print("enter number of iterations")
 
@@ -41,7 +41,8 @@ if __name__=='__main__':
     for i in iteration:
         for distance in movment:
             angle1, angle2 = calculate_angles(distance)
-    
+            
+            sleep(1)
             S1.value = angle1
             S2.value = angle2
 
